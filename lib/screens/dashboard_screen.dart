@@ -1,4 +1,5 @@
 // lib/screens/dashboard_screen.dart
+import 'package:ecowatts/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -39,7 +40,8 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 15),
 
             // Actions Rapides
-            _buildQuickActionsCard(),
+            _buildQuickActionsCard(context),
+
             const SizedBox(height: 15),
 
             // Dernière Alerte
@@ -186,7 +188,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickActionsCard() {
+  Widget _buildQuickActionsCard(BuildContext context) {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -211,7 +213,7 @@ class DashboardScreen extends StatelessWidget {
                   icon: Icons.bar_chart,
                   label: 'Historique',
                   onTap: () {
-                    // Navigation vers l'historique
+                    AppRoutes.navigateToHistory(context);// Navigation vers l'historique
                   },
                 ),
                 _buildActionButton(
@@ -225,7 +227,7 @@ class DashboardScreen extends StatelessWidget {
                   icon: Icons.lightbulb_outline,
                   label: 'Conseils',
                   onTap: () {
-                    // Navigation vers les conseils
+                    AppRoutes.navigateToTips(context);// Navigation vers les conseils
                   },
                 ),
               ],
@@ -364,7 +366,13 @@ class DashboardScreen extends StatelessWidget {
             icon: Icon(Icons.notifications),
             label: 'Alertes',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.lightbulb_outline),
+              activeIcon: Icon(Icons.lightbulb), // Icône quand sélectionné
+              label: 'Conseils',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+
         ],
         onTap: (index) {
           // Gestion de la navigation entre les onglets
@@ -373,13 +381,16 @@ class DashboardScreen extends StatelessWidget {
               // Déjà sur Dashboard
               break;
             case 1:
-              // Navigation vers Historique
+              AppRoutes.navigateToHistory(context);// Navigation vers Historique
               break;
             case 2:
-              // Navigation vers Alertes
+              AppRoutes.navigateToAlerts(context);// Navigation vers Alertes
               break;
             case 3:
-              // Navigation vers Profil
+             AppRoutes.navigateToTips(context); // Navigation vers conseil
+              break;
+            case 4:
+              AppRoutes.navigateToProfile(context);// Navigation vers Profil
               break;
           }
         },

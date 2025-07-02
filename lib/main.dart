@@ -1,5 +1,9 @@
+import 'package:ecowatts/screens/alerts_screen.dart';
 import 'package:ecowatts/screens/dashboard_screen.dart';
+import 'package:ecowatts/screens/history_screen.dart';
 import 'package:ecowatts/screens/login_screen.dart';
+import 'package:ecowatts/screens/profile_screen.dart';
+import 'package:ecowatts/screens/tips_screen.dart';
 import 'package:ecowatts/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +36,18 @@ class EcoWatts extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/dashboard': (context) => const AuthMiddleware(
           child: DashboardScreen(), // Remplace par ton écran dashboard
+        ),
+        '/history': (context) => const AuthMiddleware(
+          child: HistoryScreen(),
+        ),
+        '/alerts': (context) => const AuthMiddleware(
+          child: AlertsScreen(),
+        ),
+          '/tips': (context) => const AuthMiddleware(
+          child: TipsScreen(),
+        ),
+          '/profile': (context) => const AuthMiddleware(
+          child: ProfileScreen(),
         ),
       },
     );
