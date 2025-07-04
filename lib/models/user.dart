@@ -20,6 +20,10 @@ class User {
   @JsonKey(defaultValue: '')
   final String telephone;
 
+  @JsonKey(defaultValue: '')
+  final String avatar;
+
+
   @JsonKey(name: 'created_at')
   final String? createdAt;
 
@@ -32,6 +36,7 @@ class User {
     required this.prenom,
     required this.email,
     required this.telephone,
+    required this.avatar,
     this.createdAt,
     this.updatedAt,
   });
@@ -45,12 +50,13 @@ class User {
       print('JSON reçu: $json');
 
       // Créer un utilisateur par défaut en cas d'erreur
-      return User(
+return User(
         id: json['id'] ?? 0,
         nom: json['nom']?.toString() ?? '',
         prenom: json['prenom']?.toString() ?? '',
         email: json['email']?.toString() ?? '',
         telephone: json['telephone']?.toString() ?? '',
+        avatar: json['avatar']?.toString() ?? '',
         createdAt: json['created_at']?.toString(),
         updatedAt: json['updated_at']?.toString(),
       );
@@ -62,10 +68,45 @@ class User {
   // Méthode pour obtenir le nom complet
   String get nomComplet => '$prenom $nom';
 
+  // Méthode pour obtenir l'URL complète de l'avatar
+  String get avatarUrl {
+    if (avatar.isEmpty) return '';
+    // Si l'avatar commence déjà par http, le retourner tel quel
+    if (avatar.startsWith('http')) return avatar;
+    // Sinon, construire l'URL complète (ajuste selon ton backend)
+    return 'http://192.168.1.67:8000/api/storage/$avatar';
+  }
+
+  // Méthode pour vérifier si l'utilisateur a un avatar
+  bool get hasAvatar => avatar.isNotEmpty;
+
+  // Créer une copie avec des modifications
+  User copyWith({
+    int? id,
+    String? nom,
+    String? prenom,
+    String? email,
+    String? telephone,
+    String? avatar,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    return User(
+      id: id ?? this.id,
+      nom: nom ?? this.nom,
+      prenom: prenom ?? this.prenom,
+      email: email ?? this.email,
+      telephone: telephone ?? this.telephone,
+      avatar: avatar ?? this.avatar,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   // Méthode toString pour le debug
   @override
   String toString() {
-    return 'User{id: $id, nom: $nom, prenom: $prenom, email: $email, telephone: $telephone}';
+    return 'User{id: $id, nom: $nom, prenom: $prenom, email: $email, telephone: $telephone, avatar: $avatar}';
   }
 }
 

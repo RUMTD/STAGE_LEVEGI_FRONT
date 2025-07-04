@@ -340,7 +340,7 @@ class AuthService {
           'prenom': prenom,
           'email': email,
           'telephone': telephone,
-          'password': password,
+          'mot_de_passe': password,
         }),
       );
 

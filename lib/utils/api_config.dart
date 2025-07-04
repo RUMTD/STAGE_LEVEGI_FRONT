@@ -1,6 +1,6 @@
 class ApiConfig {
   // Remplace par l'URL de ton backend Laravel
-  static const String baseUrl = 'http://192.168.1.137:8000/api';
+  static const String baseUrl = 'http://192.168.1.67:8000/api';
 
   // Endpoints d'authentification (corrigés selon tes routes Laravel)
   static const String loginEndpoint = '$baseUrl/auth/login';
